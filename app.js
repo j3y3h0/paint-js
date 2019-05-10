@@ -1,6 +1,8 @@
 const canvas = document.getElementById("jsCanvas");
 const ctx = canvas.getContext("2d");
 const colors = document.getElementsByClassName("jsColor");
+const range = document.getElementById("jsRange");
+const mode = document.getElementById("jsMode");
 
 ctx.strokeStyle = "#2c2c2c";
 ctx.lineWidth = 1.5;
@@ -8,6 +10,7 @@ canvas.width = 700;
 canvas.height = 700;
 
 let painting = false;
+let filling = false;
 
 function startPainting() {
     painting = true;
@@ -38,11 +41,33 @@ function handleColorClick(event) {
     ctx.strokeStyle = color;
 }
 
+function handleRangeChange(event) {
+    const size = event.target.value;
+    ctx.lineWidth = size;
+}
+
+function handleModeClick() {
+    if (filling == true) {
+        filling = false;
+        mode.innerText = "채우기";
+    } else {
+        mode.innerText = "선";
+    }
+}
+
 if (canvas) {
     canvas.addEventListener("mousemove", onMouseMove);
     canvas.addEventListener("mousedown", startPainting);
     canvas.addEventListener("mouseup", stopPainting);
     canvas.addEventListener("mouseleave", stopPainting);
+}
+
+if(range) {
+    range.addEventListener("input", handleRangeChange);
+}
+
+if(mode) {
+    mode.addEventListener("click", handleModeClick);
 }
 
 Array.from(colors).forEach(color =>
