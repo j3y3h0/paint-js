@@ -1,3 +1,3 @@
 # paint-js
 
-https://boxbunny.github.io/paint-js/
+https://han-jojo.github.io/paint-js/
